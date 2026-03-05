@@ -22,7 +22,7 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines (cursor stays)" })
 
 vim.keymap.set("n", "Q", "<nop>", { desc = "Disable Q" })
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
-vim.keymap.set("n", "<leader>w", ":q<CR>", { desc = "Quit" })
+vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 
 vim.keymap.set("t", "<C-n>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 

@@ -48,7 +48,7 @@ return {
 					end)
 					return items
 				end,
-				{ icon = " ", key = "q", desc = "Quit", action = ":qa", padding = { 1, 0 } },
+				{ key = "q", action = ":qa", hidden = true },
 				{ section = "startup" },
 			},
 		},
