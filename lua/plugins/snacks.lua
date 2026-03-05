@@ -5,7 +5,7 @@ return {
 	---@type snacks.Config
 	opts = {
 		dashboard = {
-			width = 65,
+			width = 40,
 			preset = {
 				header = [[
  ██████╗ ██╗   ██╗███████╗███████╗ █████╗ ███╗   ███╗ █████╗
@@ -73,8 +73,62 @@ return {
 						end
 						return a.desc < b.desc
 					end)
-					return items
+					local visible = {}
+					for i = 1, math.min(9, #items) do
+						visible[i] = items[i]
+					end
+					return visible
 				end,
+				{
+					key = "p",
+					hidden = true,
+					action = function()
+						local projects_dir = vim.fn.expand("~/projects")
+						local mru_file = vim.fn.stdpath("data") .. "/project_mru.json"
+						local f = io.open(mru_file, "r")
+						local mru = {}
+						if f then
+							local ok, data = pcall(vim.json.decode, f:read("*a"))
+							f:close()
+							if ok then
+								mru = data
+							end
+						end
+						local dirs = {}
+						local handle = vim.loop.fs_scandir(projects_dir)
+						if handle then
+							while true do
+								local name, ftype = vim.loop.fs_scandir_next(handle)
+								if not name then
+									break
+								end
+								if ftype == "directory" then
+									table.insert(dirs, name)
+								end
+							end
+						end
+						table.sort(dirs, function(a, b)
+							local ta, tb = mru[a] or 0, mru[b] or 0
+							if ta ~= tb then
+								return ta > tb
+							end
+							return a < b
+						end)
+						vim.ui.select(dirs, { prompt = "Projects" }, function(choice)
+							if choice then
+								local dir = projects_dir .. "/" .. choice
+								mru[choice] = os.time()
+								local wf = io.open(mru_file, "w")
+								if wf then
+									wf:write(vim.json.encode(mru))
+									wf:close()
+								end
+								vim.cmd.cd(dir)
+								require("oil").open(dir)
+							end
+						end)
+					end,
+				},
 				{ key = "q", action = ":qa", hidden = true },
 				},
 		},
