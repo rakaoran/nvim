@@ -14,6 +14,7 @@ vim.opt.smartcase = true
 vim.opt.inccommand = "split"
 
 vim.opt.scrolloff = 50
+vim.opt.ruler = false
 
 vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"
 vim.opt.undofile = true
@@ -43,21 +44,20 @@ vim.opt.writebackup = false
 vim.opt.virtualedit = "block"
 
 vim.diagnostic.config({
-    severity_sort = true,
-    float = { border = "rounded", source = "if_many" },
-    underline = { severity = vim.diagnostic.severity.ERROR },
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = "󰅚 ",
-            [vim.diagnostic.severity.WARN] = "󰀪 ",
-            [vim.diagnostic.severity.INFO] = "󰋽 ",
-            [vim.diagnostic.severity.HINT] = "󰌶 ",
-        },
-    },
-    virtual_text = {
-        source = "if_many",
-        spacing = 2,
-    },
+	severity_sort = true,
+	float = { border = "rounded", source = "if_many" },
+	underline = { severity = vim.diagnostic.severity.ERROR },
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "󰅚 ",
+			[vim.diagnostic.severity.WARN] = "󰀪 ",
+			[vim.diagnostic.severity.INFO] = "󰋽 ",
+			[vim.diagnostic.severity.HINT] = "󰌶 ",
+		},
+	},
+	virtual_text = {
+		source = "if_many",
+		spacing = 2,
+	},
 })
 -- TODO: add folding with tree sitter
-
