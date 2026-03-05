@@ -2,8 +2,41 @@ return {
 	"akinsho/bufferline.nvim",
 	version = "*",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	event = "VeryLazy",
-	opts = {
+	lazy = false,
+	opts = function()
+		local colors = require("tokyonight.colors").setup({ style = "night" })
+		return {
+		highlights = {
+			fill = { bg = colors.bg_dark },
+			background = { bg = colors.bg_dark, fg = colors.comment },
+			buffer_selected = { bg = colors.bg, bold = true },
+			buffer_visible = { bg = colors.bg_dark, fg = colors.fg_dark },
+			separator = { bg = colors.bg_dark, fg = colors.bg_dark },
+			separator_selected = { bg = colors.bg, fg = colors.bg_dark },
+			separator_visible = { bg = colors.bg_dark, fg = colors.bg_dark },
+			numbers = { bg = colors.bg_dark, fg = colors.comment },
+			numbers_selected = { bg = colors.bg, bold = true },
+			numbers_visible = { bg = colors.bg_dark, fg = colors.fg_dark },
+			modified = { bg = colors.bg_dark },
+			modified_selected = { bg = colors.bg },
+			modified_visible = { bg = colors.bg_dark },
+			duplicate = { bg = colors.bg_dark, fg = colors.comment },
+			duplicate_selected = { bg = colors.bg, italic = true },
+			duplicate_visible = { bg = colors.bg_dark, fg = colors.comment },
+			diagnostic = { bg = colors.bg_dark },
+			diagnostic_selected = { bg = colors.bg },
+			diagnostic_visible = { bg = colors.bg_dark },
+			hint = { bg = colors.bg_dark },
+			hint_selected = { bg = colors.bg },
+			hint_visible = { bg = colors.bg_dark },
+			warning = { bg = colors.bg_dark },
+			warning_selected = { bg = colors.bg },
+			warning_visible = { bg = colors.bg_dark },
+			error = { bg = colors.bg_dark },
+			error_selected = { bg = colors.bg },
+			error_visible = { bg = colors.bg_dark },
+			indicator_selected = { fg = colors.git.change, bg = colors.bg },
+		},
 		options = {
 			numbers = "ordinal",
 			close_command = "bdelete! %d",
@@ -25,7 +58,8 @@ return {
 				},
 			},
 		},
-	},
+	}
+	end,
 	keys = {
 		{ "<leader>1", "<cmd>BufferLineGoToBuffer 1<cr>", desc = "Go to buffer 1" },
 		{ "<leader>2", "<cmd>BufferLineGoToBuffer 2<cr>", desc = "Go to buffer 2" },

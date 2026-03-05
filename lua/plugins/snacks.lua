@@ -4,6 +4,54 @@ return {
 	lazy = false,
 	---@type snacks.Config
 	opts = {
+		dashboard = {
+			width = 65,
+			preset = {
+				header = [[
+ ██████╗ ██╗   ██╗███████╗███████╗ █████╗ ███╗   ███╗ █████╗
+██╔═══██╗██║   ██║██╔════╝██╔════╝██╔══██╗████╗ ████║██╔══██╗
+██║   ██║██║   ██║███████╗███████╗███████║██╔████╔██║███████║
+██║   ██║██║   ██║╚════██║╚════██║██╔══██║██║╚██╔╝██║██╔══██║
+╚██████╔╝╚██████╔╝███████║███████║██║  ██║██║ ╚═╝ ██║██║  ██║
+ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝]],
+			},
+			sections = {
+				{ section = "header" },
+				{ icon = " ", title = "Projects", padding = 1 },
+				function()
+					local projects_dir = vim.fn.expand("~/projects")
+					local items = {}
+					local handle = vim.loop.fs_scandir(projects_dir)
+					if handle then
+						while true do
+							local name, ftype = vim.loop.fs_scandir_next(handle)
+							if not name then
+								break
+							end
+							if ftype == "directory" then
+								local dir = projects_dir .. "/" .. name
+								table.insert(items, {
+									icon = " ",
+									desc = name,
+									indent = 2,
+									autokey = true,
+									action = function()
+										vim.cmd.cd(dir)
+										require("oil").open(dir)
+									end,
+								})
+							end
+						end
+					end
+					table.sort(items, function(a, b)
+						return a.desc < b.desc
+					end)
+					return items
+				end,
+				{ icon = " ", key = "q", desc = "Quit", action = ":qa", padding = { 1, 0 } },
+				{ section = "startup" },
+			},
+		},
 		picker = {
 			ui_select = true,
 
