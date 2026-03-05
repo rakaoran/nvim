@@ -20,6 +20,27 @@ return {
 				{ icon = " ", title = "Projects", padding = 1 },
 				function()
 					local projects_dir = vim.fn.expand("~/projects")
+					local mru_file = vim.fn.stdpath("data") .. "/project_mru.json"
+
+					local function read_mru()
+						local f = io.open(mru_file, "r")
+						if not f then
+							return {}
+						end
+						local ok, data = pcall(vim.json.decode, f:read("*a"))
+						f:close()
+						return ok and data or {}
+					end
+
+					local function write_mru(data)
+						local f = io.open(mru_file, "w")
+						if f then
+							f:write(vim.json.encode(data))
+							f:close()
+						end
+					end
+
+					local mru = read_mru()
 					local items = {}
 					local handle = vim.loop.fs_scandir(projects_dir)
 					if handle then
@@ -35,7 +56,10 @@ return {
 									desc = name,
 									indent = 2,
 									autokey = true,
+									_ts = mru[name] or 0,
 									action = function()
+										mru[name] = os.time()
+										write_mru(mru)
 										vim.cmd.cd(dir)
 										require("oil").open(dir)
 									end,
@@ -44,13 +68,15 @@ return {
 						end
 					end
 					table.sort(items, function(a, b)
+						if a._ts ~= b._ts then
+							return a._ts > b._ts
+						end
 						return a.desc < b.desc
 					end)
 					return items
 				end,
 				{ key = "q", action = ":qa", hidden = true },
-				{ section = "startup" },
-			},
+				},
 		},
 		picker = {
 			ui_select = true,
