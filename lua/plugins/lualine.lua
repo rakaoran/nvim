@@ -19,9 +19,8 @@ return {
 					path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute
 				},
 			},
-			lualine_x = { "diagnostics" },
-			lualine_y = { "filetype" },
-			lualine_z = { "location" },
+			lualine_y = { "diagnostics" },
+			lualine_z = { "filetype" },
 		},
 	},
 }

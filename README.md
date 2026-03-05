@@ -38,7 +38,7 @@ type Meow struct {
 
 `K` (visual): move selection up
 
-`<C-_>`: toggle comment (line or selection)
+`<C-_>`: toggle comment (line or selection, \_ in terminal is same as /)
 
 `<M-d>`: delete to void register
 
