@@ -2,7 +2,6 @@
 
 `<Esc>`: clear search 'highlight'
 `<leader>w`: save file
-`Q`: disabled
 `<leader>r`: replace word under cursor globally
 `<leader>?`: show buffer keymaps (which-key)
 `i`: smart insert (auto-indent on empty line)
