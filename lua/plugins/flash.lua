@@ -5,7 +5,7 @@ return {
 	---@type Flash.Config
 	opts = {
 		labels = "arstgmneiopfwbluyjkvqhdcxz",
-		modes = { search = { mode = "exact", enabled = true }, char = { jump_labels = true, keys = { "f", "F" } } },
+		modes = { char = { jump_labels = true, keys = { "f", "F" } } },
 	},
 	config = function(_, opts)
 		require("flash").setup(opts)
