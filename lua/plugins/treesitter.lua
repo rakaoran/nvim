@@ -38,6 +38,8 @@ return {
 				"python",
 				"javascript",
 				"typescript",
+				"javascriptreact",
+				"typescriptreact",
 				"html",
 				"css",
 				"json",

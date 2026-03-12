@@ -6,8 +6,6 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		config = function(_, opts)
-			require("mason-lspconfig").setup(opts)
-
 			vim.lsp.config("lua_ls", {
 				settings = {
 					Lua = {
@@ -25,6 +23,7 @@ return {
 				"lua_ls",
 				"bashls",
 				"buf_ls",
+				"tailwindcss",
 				"zls",
 				"pyright",
 				"ts_ls",
@@ -35,6 +34,7 @@ return {
 				"gopls",
 				"rust_analyzer",
 				"tailwindcss",
+				"eslint",
 			},
 			automatic_enable = true,
 		},

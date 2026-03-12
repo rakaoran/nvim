@@ -23,6 +23,8 @@ return {
 			python = { "black" }, -- pip install black
 			javascript = { "prettier" }, -- pnpm i -g prettier
 			typescript = { "prettier" },
+			javascriptreact = { "prettier" },
+			typescriptreact = { "prettier" },
 			c = { "clang-format" }, -- sudo apt install clang-format
 			cpp = { "clang-format" },
 			go = { "goimports", "gofmt" }, -- go install golang.org/x/tools/cmd/goimports@latest  (gofmt comes with go)
