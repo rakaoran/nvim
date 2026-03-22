@@ -15,8 +15,8 @@ vim.keymap.set({ "n", "v" }, "<M-x>", '"_x', { desc = "x to void" })
 vim.keymap.set({ "n", "v" }, "<M-s>", '"_s', { desc = "s to void" })
 vim.keymap.set("x", "<A-p>", [["_dP]], { desc = "Paste without losing clipboard" })
 
-vim.keymap.set("n", "<C-_>", "gcc", { remap = true, desc = "Toggle comment line" }) -- _ same as /, just terminal support haha
-vim.keymap.set("v", "<C-_>", "gc", { remap = true, desc = "Toggle comment selection" }) -- _ same as /, just terminal support haha
+vim.keymap.set("n", "<C-/>", "gcc", { remap = true, desc = "Toggle comment line" }) -- _ same as /, just terminal support haha
+vim.keymap.set("v", "<C-/>", "gc", { remap = true, desc = "Toggle comment selection" }) -- _ same as /, just terminal support haha
 
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines (cursor stays)" })
 

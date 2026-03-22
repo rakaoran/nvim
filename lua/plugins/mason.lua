@@ -6,6 +6,9 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		config = function(_, opts)
+			vim.lsp.config("*", {
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
+			})
 			vim.lsp.config("lua_ls", {
 				settings = {
 					Lua = {
@@ -17,6 +20,7 @@ return {
 					},
 				},
 			})
+			require("mason-lspconfig").setup(opts)
 		end,
 		opts = {
 			ensure_installed = {
@@ -33,7 +37,6 @@ return {
 				"jsonls",
 				"gopls",
 				"rust_analyzer",
-				"tailwindcss",
 				"eslint",
 			},
 			automatic_enable = true,

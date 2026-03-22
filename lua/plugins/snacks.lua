@@ -2,6 +2,14 @@ return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
+	init = function()
+		-- Cool neon purple/cyan dashboard colors
+		vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { fg = "#bd93f9" })
+		vim.api.nvim_set_hl(0, "SnacksDashboardTitle", { fg = "#8be9fd", bold = true })
+		vim.api.nvim_set_hl(0, "SnacksDashboardIcon", { fg = "#ff79c6" })
+		vim.api.nvim_set_hl(0, "SnacksDashboardKey", { fg = "#50fa7b", bold = true })
+		vim.api.nvim_set_hl(0, "SnacksDashboardDesc", { fg = "#f8f8f2" })
+	end,
 	---@type snacks.Config
 	opts = {
 		dashboard = {
@@ -14,11 +22,16 @@ return {
 ██║   ██║██║   ██║╚════██║╚════██║██╔══██║██║╚██╔╝██║██╔══██║
 ╚██████╔╝╚██████╔╝███████║███████║██║  ██║██║ ╚═╝ ██║██║  ██║
  ╚═════╝  ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝
-
-              ]],
+                  ╱╱  r a k a o r a n  ╱╱]],
 			},
 			sections = {
-				{ section = "header" },
+				{ section = "header", padding = 0 },
+				{
+					section = "terminal",
+					cmd = "colorscript -e bars",
+					height = 4,
+					padding = 1,
+				},
 				{ icon = " ", title = "Projects", padding = 1 },
 				function()
 					local projects_dir = vim.fn.expand("~/projects")
